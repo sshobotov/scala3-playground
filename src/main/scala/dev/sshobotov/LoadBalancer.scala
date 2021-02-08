@@ -10,17 +10,7 @@ import scala.math.Ordered._
  * @param strategy         algorithm how to distribute requests between Providers
  * @param registryCap      maximum number of Providers alllowed to register, minimum=1 default=10
  * @param heartBeatCheck   Providers' liveness check, optional
- * @param requestRateLimit incomming requests 
- * 
- * Example:
- * {{{
- * import java.util.Timer
- * import scala.concurrent.duration._
- * 
- * val tm = new Timer("heartbeeat-timer")
- * val hb = HeartBeatCheck.thresholding(new HeartBeatCheck.TimingBeat(tm, 2.seconds))
- * val lb = new LoadBalancer(new RoundRobinBalancing, heartBeatCheck = Some(hb), requestRateLimit = Some(RateLimiter.inFlight(100)))
- * }}}
+ * @param requestRateLimit incomming requests rate limiter, optional
  */
 class LoadBalancer(
   strategy: BalancingStrategy[Provider],

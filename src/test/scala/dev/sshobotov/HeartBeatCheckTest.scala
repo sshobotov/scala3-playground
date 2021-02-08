@@ -42,7 +42,9 @@ class HeartBeatCheckTest extends util.NamedFunSuite {
     )
     heartbeat.trigger
 
-    assertEquals(recorded.get, Vector(("test", false)))
+    eventualy {
+      assertEquals(recorded.get, Vector(("test", false)))
+    }
   }
 
   test("notify unsuccessful check if check was failed") {
@@ -57,7 +59,9 @@ class HeartBeatCheckTest extends util.NamedFunSuite {
     )
     heartbeat.trigger
 
-    assertEquals(recorded.get, Vector(("test", false)))
+    eventualy {
+      assertEquals(recorded.get, Vector(("test", false)))
+    }
   }
 
   test("not notify if check was just successful") {
@@ -72,7 +76,9 @@ class HeartBeatCheckTest extends util.NamedFunSuite {
     )
     heartbeat.trigger
 
-    assertEquals(recorded.get, Vector.empty[(String, Boolean)])
+    eventualy {
+      assertEquals(recorded.get, Vector.empty[(String, Boolean)])
+    }
   }
 
   test("notify successful check if check was successful configured number of times after unsuccessful check") {
@@ -94,7 +100,9 @@ class HeartBeatCheckTest extends util.NamedFunSuite {
     heartbeat.trigger
     heartbeat.trigger
 
-    assertEquals(recorded.get, Vector(("test", false), ("test", true)))
+    eventualy {
+      assertEquals(recorded.get, Vector(("test", false), ("test", true)))
+    }
   }
 
   test("not notify successful check if checks was successful but was interrupted by unsuccessful check") {
@@ -117,7 +125,9 @@ class HeartBeatCheckTest extends util.NamedFunSuite {
     heartbeat.trigger
     heartbeat.trigger
 
-    assertEquals(recorded.get, Vector(("test", false), ("test", false)))
+    eventualy {
+      assertEquals(recorded.get, Vector(("test", false), ("test", false)))
+    }
   }
 
   test("propagate cancellation to undeerlying HeartBeat") {
@@ -133,6 +143,8 @@ class HeartBeatCheckTest extends util.NamedFunSuite {
     cancel()
     heartbeat.trigger
 
-    assertEquals(recorded.get, Vector.empty[(String, Boolean)])
+    eventualy {
+      assertEquals(recorded.get, Vector.empty[(String, Boolean)])
+    }
   }
 }
